@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio — Social Boost Agency</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    :root {
+      --bg:       #0F0F1A;
+      --surface:  #16162A;
+      --border:   rgba(255,255,255,0.08);
+      --accent:   #7C3AED;
+      --accent-2: #2563EB;
+      --text:     #F0F0FF;
+      --muted:    #9B9BC0;
+      --grad:     linear-gradient(135deg, #2563EB 0%, #7C3AED 100%);
+      --grad-text: linear-gradient(135deg, #60A5FA 0%, #C084FC 100%);
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+      overflow-x: hidden;
+    }
+
+    /* Background grid */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(124,58,237,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(124,58,237,0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .wrap {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 480px;
+    }
+
+    /* Header */
+    .header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .badge {
+      display: inline-block;
+      font-family: 'Syne', sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #C084FC;
+      border: 1px solid rgba(124,58,237,0.3);
+      background: rgba(124,58,237,0.15);
+      padding: 5px 14px;
+      border-radius: 99px;
+      margin-bottom: 20px;
+    }
+
+    .logo {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2rem, 8vw, 2.8rem);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      color: var(--text);
+    }
+
+    .logo span {
+      background: var(--grad-text);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .subtitle {
+      margin-top: 10px;
+      font-size: 13px;
+      color: var(--muted);
+      font-weight: 300;
+      letter-spacing: 0.02em;
+    }
+
+    /* Cards */
+    .cards {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .card {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px 22px;
+      text-decoration: none;
+      color: var(--text);
+      transition: border-color 0.2s, transform 0.2s, background 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(124,58,237,0.07), transparent);
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    .card:hover {
+      border-color: rgba(124,58,237,0.4);
+      transform: translateY(-3px);
+      background: #1E1E35;
+    }
+
+    .card:hover::before { opacity: 1; }
+
+    .card-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      flex-shrink: 0;
+    }
+
+    .card-body {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .card-tag {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 3px;
+    }
+
+    .card-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .card-desc {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    .card-arrow {
+      color: var(--muted);
+      font-size: 18px;
+      transition: color 0.2s, transform 0.2s;
+      flex-shrink: 0;
+    }
+
+    .card:hover .card-arrow {
+      color: #C084FC;
+      transform: translateX(4px);
+    }
+
+    /* Accent dot on hover */
+    .card:hover .card-tag { color: #C084FC; }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      margin-top: 40px;
+      font-size: 11px;
+      color: #3a3a5a;
+      letter-spacing: 0.06em;
+    }
+
+    .footer span {
+      color: #C084FC;
+      opacity: 0.6;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .card { transition: none; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <div class="header">
+    <div class="badge">Portfolio</div>
+    <div class="logo">Social <span>Boost</span><br/>Agency</div>
+    <p class="subtitle">Contoh Landing Page yang kami buat</p>
+  </div>
+
+  <div class="cards">
+
+    <a href="https://f8493371-crypto.github.io/Seblak-Mpok-Ati/" target="_blank" class="card">
+      <div class="card-icon" style="background:#1a0f2e">🍲</div>
+      <div class="card-body">
+        <div class="card-tag">F&B · Landing Page</div>
+        <div class="card-title">Seblak Mpok Ati</div>
+        <div class="card-desc">Kuliner lokal — desain bold & eye-catching</div>
+      </div>
+      <div class="card-arrow">→</div>
+    </a>
+
+    <a href="https://f8493371-crypto.github.io/Jaya-Kontruksi-/" target="_blank" class="card">
+      <div class="card-icon" style="background:#0f1628">🏗️</div>
+      <div class="card-body">
+        <div class="card-tag">B2B · Landing Page</div>
+        <div class="card-title">Bangun Jaya Konstruksi</div>
+        <div class="card-desc">Kontraktor profesional — clean & corporate</div>
+      </div>
+      <div class="card-arrow">→</div>
+    </a>
+
+    <a href="https://f8493371-crypto.github.io/Serum/" target="_blank" class="card">
+      <div class="card-icon" style="background:#1a0f2e">✨</div>
+      <div class="card-body">
+        <div class="card-tag">B2C · Landing Page</div>
+        <div class="card-title">GlowUp Serum</div>
+        <div class="card-desc">Skincare — elegant & conversion-focused</div>
+      </div>
+      <div class="card-arrow">→</div>
+    </a>
+
+  </div>
+
+  <div class="footer">
+    Made with <span>♥</span> by Social Boost Agency
+  </div>
+
+</div>
+
+</body>
+</html>
